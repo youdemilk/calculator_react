@@ -1,0 +1,7 @@
+.btn-box {
+    display: flex;
+    max-width: 800px;
+    flex-wrap: wrap;
+    margin: 10px auto;
+    justify-content: space-around
+}

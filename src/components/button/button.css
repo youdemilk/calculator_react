@@ -1,0 +1,52 @@
+.btn_action,
+.btn_res,
+.btn_clear,
+.btn_number,
+.btn_operation {
+    background: #dddddd;
+    color: #ffffff;
+    width: 170px;
+    height: 100px;
+    border: 0;
+    margin: 2px;
+    border-radius: 2px;
+    outline: none;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    margin: .375rem;
+    font-size: 20px;
+}
+.btn_operation {
+    background: #fb3;
+}
+.btn_clear {
+    background: #e0e0e0;
+    color: #000;
+}
+.btn_number {
+    background: #78909c;
+}
+.btn_number:active {
+    background: #4a5b64;
+}
+.btn_action:focus {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+}
+
+.btn_operation:active {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    background-color: #c80;
+}
+
+.btn_clear:active,
+.btn_action:active {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    background-color: #adadad;
+}
+
+.btn_clear:hover,
+.btn_operation:hover,
+.btn_action:hover,
+.btn_number:hover {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    outline: 0;
+}
