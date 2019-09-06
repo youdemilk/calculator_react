@@ -1,14 +1,8 @@
 import React, {Component} from 'react';
 import Button from '../button';
 import './history.css';
-
-export default class History extends Component {
     
-    
-
-    
-    render() {
-        let {history, clearHistory} = this.props;
+const History = ({history, clearHistory}) => {
         history = JSON.parse(localStorage.getItem('currUser')).history
         const clearBtn = {
             label: 'Clear',
@@ -34,6 +28,6 @@ export default class History extends Component {
                 </ul>
             </div>
         )
-    }
-    
 }
+
+export default History
