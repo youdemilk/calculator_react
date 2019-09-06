@@ -11,20 +11,19 @@ export default class BtnEdit extends Component {
     }
 
     componentDidMount() {
-        let btns = localStorage.getItem('buttons');
-        if (btns !== '') {
-            btns = btns.split(',');
-        } else {
-            btns = [];
-        }
+        let btns = JSON.parse(localStorage.getItem('currUser')).btns;
         this.setState({buttons: btns});
     }
 
     deleteBtn = (label, item) => {
-        const btns = this.state.buttons;
+        let btns = this.state.buttons;
         const idx = btns.indexOf(item);
         const arr = [...btns.slice(0, idx), ...btns.slice(idx+1)];
-        localStorage.setItem('buttons', arr);
+        const user_idx = parseInt(localStorage.getItem('currUserIdx'));
+        let users = JSON.parse(localStorage.getItem('users'));
+        users[user_idx].btns = arr;
+        localStorage.setItem('currUser', JSON.stringify(users[user_idx]));
+        localStorage.setItem('users', JSON.stringify(arr));
         this.setState({buttons: arr});
     }
 
@@ -49,7 +48,7 @@ export default class BtnEdit extends Component {
 
         return (
             <div>
-                <Link to = "/calculator/buttons/createBtn" className=" add_btn">Add</Link>
+                <Link to = "/calculator/buttons/createBtn" className=" add_btn" onClick = {() => localStorage.setItem('currBtn', '')}>Add</Link>
                 <Link to = "/calculator" className = "return_btn">Back</Link>
                 <ul className="buttons-list">
                     {buttonsList}

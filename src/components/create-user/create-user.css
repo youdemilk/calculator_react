@@ -30,3 +30,15 @@
 .input_add {
     padding-left: 20px;
 }
+
+.form_input {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin-right: 22px
+}
+
+.form_input_item {
+    margin: 2px;
+    width: 100%;
+}

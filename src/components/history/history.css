@@ -43,5 +43,37 @@
 
 .history-logo {
     font-size: 25px;
-    margin: 5px;
+    width: 100%
+}
+
+.history_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background: #e0e0e0
+}
+
+.clear_btn {
+    background-color: #ff3547;
+    margin-left: 20px;
+    color: #ffffff;
+    padding: 10px;
+    border: 0;
+    border-radius: 2px;
+    outline: none;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    font-size: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.clear_btn:active {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    background-color: #ce0012;
+}
+
+.clear_btn:hover {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    outline: 0;
 }

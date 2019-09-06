@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Button from  '../button';
 
 import './btn-box.css';
+import { infixToPostfix } from '../../utils';
 
 export default class Buttons extends Component {
 
@@ -155,10 +156,34 @@ export default class Buttons extends Component {
 
                 { 
                     label: '+/-',
-                    btnStyle: 'btn_number',
+                    btnStyle: 'btn_addOperation',
                     funcBtn: this.changeSign,
                     id: 21
                 },
+
+                { 
+                    label: '^',
+                    btnStyle: 'btn_addOperation',
+                    funcBtn: () => this.toInput('^'),
+                    id: 22
+                },
+
+                { 
+                    label: '(',
+                    btnStyle: 'btn_addOperation',
+                    funcBtn: () => this.toInput('('),
+                    id: 23
+                },
+
+                { 
+                    label: ')',
+                    btnStyle: 'btn_addOperation',
+                    funcBtn: () => this.toInput(')'),
+                    id: 24
+                },
+
+
+
             ]
         }
     }
@@ -230,7 +255,6 @@ export default class Buttons extends Component {
     }
 
     toInput = (label) => {
-        console.log(label)
         this.props.clickHandler (this.props.input + label, this.props.display + label );  
     }
 
@@ -243,16 +267,19 @@ export default class Buttons extends Component {
         if (this.props.input.includes('/0')) res = 'You cant division by 0';
         else if (this.props.input.includes('%')) res = this.getPerc();
         else {
-            let hist = localStorage.getItem('history');
-
-            if (hist !== null) {
-                hist = hist.split(',');
+            const user_idx = JSON.parse(localStorage.getItem('currUserIdx'));
+            let users = JSON.parse(localStorage.getItem('users'));
+            let history = users[user_idx].history;
+            const result = this.props.input + '=' + infixToPostfix(this.props.input);
+            if (history.length !== 0) {
+                history.push(result)
             } else {
-                hist = [];
+                history = [result];
             }
-            res = eval(this.props.input);
-            hist.push(eval(this.props.input));
-            localStorage.setItem('history', hist);
+            res = infixToPostfix(this.props.input);
+            users[user_idx].history = history;
+            localStorage.setItem('currUser', JSON.stringify(users[user_idx]));
+            localStorage.setItem('users', JSON.stringify(users));
             if (isNaN(res)) res = 'Undefined';
         }
         this.props.clickHandler(res, res);
@@ -260,9 +287,9 @@ export default class Buttons extends Component {
 
     render() {
         const elements =  this.state.btnData.map(el => <Button key={el.id} props = {el} />); 
-        let customBtns = localStorage.getItem('buttons');
+        let customBtns = JSON.parse(localStorage.getItem('currUser')).btns;
         if (customBtns) {
-            customBtns = customBtns.split(',').map((item) => {
+            customBtns = customBtns.map((item) => {
                 const properties = {
                     label: item,
                     btnStyle: 'btn_number',

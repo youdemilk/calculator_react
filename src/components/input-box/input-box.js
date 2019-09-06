@@ -4,7 +4,7 @@ import './input-box.css'
 
 const InputBox = ({ input }) => {
     return (
-        <input type = "text" value = { input } readOnly />
+        <input type = "text" value = { input }  readOnly/>
     );
 };
 

@@ -1,8 +1,10 @@
 import React from 'react';
 
+import './app-header.css' 
+
 const AppHeader = () => {
     return (
-      <div>
+      <div className = "app_header">  
         <h1>Calculator</h1>
       </div>
     );

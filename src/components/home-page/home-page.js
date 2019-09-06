@@ -1,33 +1,27 @@
 import React, {Component} from 'react';
 import Button from '../button';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import './home-page.css'
 
-
-
-export class Home extends Component {
+export default class Home extends Component {
     state = {
         users: [],
     };
 
     componentDidMount() {
-        let users = localStorage.getItem('users');
-        if (users !== null) {
-           users = users.split(',');
-        }
-        else {
+        let users = JSON.parse(localStorage.getItem('users'));
+        if (users === null) {
             users = [];
         }
         this.setState({users: users});
     }
 
     deleteUser = (label, item) => {
-        const users = this.state.users;
+        let users = this.state.users;
         const idx = users.indexOf(item);
-        const arr = [...users.slice(0, idx), ...users.slice(idx+1)];
-        localStorage.setItem('users', arr);
+        let arr = [...users.slice(0, idx), ...users.slice(idx+1)];
+        localStorage.setItem('users', JSON.stringify(arr));
         this.setState({users: arr});
     };
 
@@ -39,10 +33,13 @@ export class Home extends Component {
         }
         console.log(this.props.user);
 
-        const usersList = this.state.users.map((item) => {
-            return <li key={item}>
-                        <Link className="btn_name"to="/calculator" onClick = {() => localStorage.setItem('currUser', item) }>{item}</Link>
-                        <Link to="/edituser" onClick = {() => localStorage.setItem('currUser', item) } className='edit_btn'>Edit</Link>
+        const usersList = this.state.users.map((item, index) => {
+            return <li key={item['name']}>
+                        <Link className="btn_name" to="/calculator" onClick = {() => {
+                                                                                        localStorage.setItem('currUser',  JSON.stringify(item))
+                                                                                        localStorage.setItem('currUserIdx', index.toString());
+                                                                                    } }>{item['name']}</Link>
+                        <Link to="/edituser" onClick = {() => localStorage.setItem('currUser', JSON.stringify(item)) } className='edit_btn'>Edit</Link>
                         <Button props={delete_btn} item={item}/>
                     </li>
         });
@@ -57,11 +54,3 @@ export class Home extends Component {
         )
     }
 };
-
-const mapStateToProps = (state) => {
-    return {
-        user: state.user
-    };
-};
-
-export default connect(mapStateToProps)(Home)

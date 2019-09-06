@@ -15,13 +15,22 @@ export default class Calc extends Component {
         this.state = {
             input: '',
             display: '',
-            history: '',
+            history: JSON.parse(localStorage.getItem('currUser')).history.length === 0 ? [] : JSON.parse(localStorage.getItem('currUser')).history,
         }
         this.operations = ['+', '-', '*', '/', '%'];
     }
 
     clickHandler = (input, display) => {
         this.setState( {input, display} )
+    }
+
+    clrHistory = (history) => {
+        const user_idx = JSON.parse(localStorage.getItem('currUserIdx'));
+        let users = JSON.parse(localStorage.getItem('users'));
+        users[user_idx]['history'] = [];
+        localStorage.setItem('currUser', JSON.stringify(users[user_idx]));
+        localStorage.setItem('users', JSON.stringify(users));
+        this.setState({ history: [] });
     }
 
     render() {
@@ -32,9 +41,10 @@ export default class Calc extends Component {
                 <InputBox input = { this.state.display } />
                 <div className="mainside">
                     <Buttons clickHandler = {this.clickHandler}
-                            input = {this.state.input} 
-                            display = {this.state.display} />
-                    <History history = {this.state.history} />
+                             input = {this.state.input} 
+                             display = {this.state.display}
+                             operators = {this.operations} />
+                    <History history={this.state.history} clearHistory = {this.clrHistory} />
                 </div>
                 <Link className="link-btn" to="/calculator/buttons">Properties</Link>
             </div>

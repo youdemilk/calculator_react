@@ -17,15 +17,11 @@ export default class CreateBtn extends Component {
 
     onSubmit = (event) => {
         event.preventDefault();
-        let btns = localStorage.getItem('buttons'), idx = 0;
+        let btns = JSON.parse(localStorage.getItem('currUser')).btns, idx = 0;
         if (btns !== '') {
-            btns = btns.split(',');
-            console.log(this.props.btnName);
             idx = btns.indexOf(this.props.btnName);
-        } else {
-            btns = [];
+            console.log(idx);
         }
-        
         if (this.props.title === 'Create'){
             btns.push(this.state.label);
         }
@@ -33,19 +29,24 @@ export default class CreateBtn extends Component {
         else {
             btns = [...btns.slice(0, idx), this.state.label, ...btns.slice(idx+1)];
         }
-        localStorage.setItem('buttons', btns);
+        const user_idx = parseInt(localStorage.getItem('currUserIdx'));
+        let users = JSON.parse(localStorage.getItem('users'));
+        users[user_idx].btns = btns;    
+        localStorage.setItem('currUser', JSON.stringify(users[user_idx]));
+        localStorage.setItem('users', JSON.stringify(users));
         this.setState({redirect: true});
     };
     
     render () {
-        if (this.state.redirect) return <Redirect to='/calculator'/>;
+        if (this.state.redirect) return <Redirect to='/calculator/buttons'/>;
         return (
             <div className="form">
                 <form onSubmit={this.onSubmit} className="create-btn-form">
                     <input  className="input_add"
                             type='text'  
                             placeholder='put name of button here...'
-                            onChange = { this.onLabelChange } />  
+                            onChange = { this.onLabelChange }
+                            value = { this.state.label } />  
                     <button type='submit' className="create-btn">Add to Calc</button>
                 </form>
             </div>
