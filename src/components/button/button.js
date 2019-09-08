@@ -1,12 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import './button.css'
+import "./button.css";
 
-const Button = ({props, item}) => {
-    const { label, btnStyle, funcBtn } = props;
-    return (
-        <button type='button' className={ btnStyle } onClick={() => funcBtn(label, item)}>{ label }</button>   
-    );
+const Button = ({ props, item }) => {
+  const { label, btnStyle, funcBtn } = props;
+  return (
+    <button
+      type="button"
+      className={btnStyle}
+      onClick={() => funcBtn(label, item)}
+    >
+      {label}
+    </button>
+  );
 };
 
-export default Button;  
+export default Button;

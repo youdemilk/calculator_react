@@ -1,11 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import './input-box.css'
+import "./input-box.css";
 
 const InputBox = ({ input }) => {
-    return (
-        <input type = "text" value = { input }  readOnly/>
-    );
+  return <input type="text" value={input} readOnly />;
 };
 
 export default InputBox;
