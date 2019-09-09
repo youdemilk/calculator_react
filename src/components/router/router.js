@@ -2,11 +2,11 @@ import React from "react";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import HomePage from "../home-page";
-import Calc from "../calc";
-import CreateBtn from "../create-btn";
-import BtnEdit from "../btn-edit";
-import CreateUser from "../create-user";
+import HomePage from "../screens/home-page";
+import Calc from "../screens/calc";
+import CreateBtn from "../screens/create-btn";
+import BtnEdit from "../screens/btn-edit";
+import CreateUser from "../screens/create-user";
 
 const Router = () => {
   return (
@@ -38,7 +38,7 @@ const Router = () => {
         <Route
           path="/createuser"
           render={props => (
-            <CreateUser {...props} title="Create" userName={""} />
+            <CreateUser {...props} title="Create" userName= "" />
           )}
         />
         <Route
@@ -57,3 +57,5 @@ const Router = () => {
 };
 
 export default Router;
+
+

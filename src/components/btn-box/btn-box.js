@@ -29,7 +29,7 @@ export default class Buttons extends Component {
         {
           label: "√",
           btnStyle: "btn_clear",
-          funcBtn: this.getSqrt,
+          funcBtn: () => this.toInput("√"),
           id: 3
         },
 
@@ -127,7 +127,7 @@ export default class Buttons extends Component {
         {
           label: "%",
           btnStyle: "btn_operation",
-          funcBtn: () => this.toInput("%"),
+          funcBtn: () => this.getPerc,
           id: 17
         },
 
@@ -184,22 +184,19 @@ export default class Buttons extends Component {
   }
 
   deleteSymbol = () => {
-    const new_input = this.props.input.slice(0, this.props.input.length - 1);
-    const new_display = this.props.display.slice(
-      0,
-      this.props.display.length - 1
-    );
-    this.props.clickHandler(new_input, new_display);
+    const { input, display, clickHandler } = this.props;
+    const new_input = input.slice(0, input.length - 1);
+    const new_display = display.slice(0, display.length - 1);
+    clickHandler(new_input, new_display);
   };
 
-  getSqrt = () => {
-    const sqrt = Math.sqrt(this.props.input);
-    this.props.clickHandler(sqrt, sqrt);
-  };
+  // getSqrt = () => {
+  //   const sqrt = Math.sqrt(this.props.input);
+  //   this.props.clickHandler(sqrt, sqrt);
+  // };
 
   calcPerc = symbol => {
     let nums = this.props.input.split(symbol);
-    console.log(nums);
     nums[1] = nums[1].slice(0, nums[1].length - 1);
     nums = nums.map(el => parseFloat(el));
     switch (symbol) {
@@ -217,18 +214,17 @@ export default class Buttons extends Component {
   };
 
   getPerc = () => {
-    let res;
-    if (this.props.input.includes("+")) {
+    let res = this.props.input;
+    if (res.includes("+")) {
       res = this.calcPerc("+");
-    } else if (this.props.input.includes("-")) {
+    } else if (res.includes("-")) {
       res = this.calcPerc("-");
-    } else if (this.props.input.includes("*")) {
+    } else if (res.includes("*")) {
       res = this.calcPerc("*");
-    } else if (this.props.input.includes("/")) {
+    } else if (res.includes("/")) {
       res = this.calcPerc("/");
     }
-    console.log(res);
-    return res;
+    this.props.clickHandler(res, res);
   };
 
   changeSign = () => {
@@ -249,10 +245,9 @@ export default class Buttons extends Component {
   };
 
   toInput = label => {
-    this.props.clickHandler(
-      this.props.input + label,
-      this.props.display + label
-    );
+    const { input, display, clickHandler } = this.props;
+
+    clickHandler(input + label, display + label);
   };
 
   clearInput = () => {
@@ -260,26 +255,31 @@ export default class Buttons extends Component {
   };
 
   getResult = () => {
+    const { input, clickHandler } = this.props;
     let res;
-    if (this.props.input.includes("/0")) res = "You cant division by 0";
-    else if (this.props.input.includes("%")) res = this.getPerc();
-    else {
+
+    if (input.includes("/0")) {
+      res = "You cant division by 0";
+    } else {
       const user_idx = JSON.parse(localStorage.getItem("currUserIdx"));
       let users = JSON.parse(localStorage.getItem("users"));
       let history = users[user_idx].history;
-      const result = this.props.input + "=" + infixToPostfix(this.props.input);
-      if (history.length !== 0) {
+      const result = input + "=" + infixToPostfix(input);
+
+      if (history.length) {
         history.push(result);
       } else {
         history = [result];
       }
-      res = infixToPostfix(this.props.input);
+
+      res = infixToPostfix(input);
       users[user_idx].history = history;
       localStorage.setItem("currUser", JSON.stringify(users[user_idx]));
       localStorage.setItem("users", JSON.stringify(users));
       if (isNaN(res)) res = "Undefined";
     }
-    this.props.clickHandler(res, res);
+    console.log(res);
+    clickHandler(res, res);
   };
 
   render() {
