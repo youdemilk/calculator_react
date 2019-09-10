@@ -41,13 +41,14 @@ const Router = () => {
         />
         <Route
           path="/edituser"
-          render={props => (
-            <CreateUser
+          render={props => {
+            console.log("123",props)
+            return <CreateUser
               {...props}
               title="Edit"
               userName={JSON.parse(localStorage.getItem("currUser"))["name"]}
             />
-          )}
+          }}
         />
       </Switch>
     </BrowserRouter>

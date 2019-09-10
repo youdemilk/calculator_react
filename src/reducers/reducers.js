@@ -21,20 +21,32 @@ export function usersReducer(state = initialState, action) {
 
     case "DELETE_USER": {
       const users = state.users.filter(item => item.id !== action.payload);
+      
       return {
         ...state,
         users
       };
     }
 
-    case "ADD_BTN": {
-      const users = [...state.users, action.payload];
-      return { ...state, users };
+    case "EDIT_USER": {
+      const users = state.users.map(item => {
+        if (item.id === action.payload.id) return action.payload;
+        return item;
+      });
+
+      return {
+        ...state,
+        users
+      };
     }
 
-    case "DELETE_BTN": {
-      const users = [...state.users, action.payload];
-      return { ...state, users };
+    case "SET_CURRENT_USER": {
+      const currentUser = action.payload
+
+      return {
+        ...state,
+        currentUser
+      };
     }
 
     default:
