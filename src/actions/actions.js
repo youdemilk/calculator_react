@@ -5,13 +5,16 @@ export const addUser = user => {
   };
 };
 
-export const delete_user = user => {
-  return {
-    type: "DELETE_USER",
-    payload: user
-  };
-};
+export const setUsers = (users) => ({
+  type: "SET_USERS",
+  payload: users,
+})
 
+export const deleteUser = (user) => ({
+  type: "DELETE_USER",
+  payload: user.id
+})
+    
 export const add_btn = user => {
   return {
     type: "ADD_BTN",

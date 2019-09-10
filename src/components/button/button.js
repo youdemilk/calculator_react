@@ -8,7 +8,7 @@ const Button = ({ props, item }) => {
     <button
       type="button"
       className={btnStyle}
-      onClick={() => funcBtn(label, item)}
+      onClick={() => funcBtn(item)}
     >
       {label}
     </button>

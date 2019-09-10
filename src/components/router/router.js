@@ -37,9 +37,7 @@ const Router = () => {
         />
         <Route
           path="/createuser"
-          render={props => (
-            <CreateUser {...props} title="Create" userName= "" />
-          )}
+          render={props => <CreateUser {...props} title="Create" userName="" />}
         />
         <Route
           path="/edituser"
@@ -57,5 +55,3 @@ const Router = () => {
 };
 
 export default Router;
-
-
