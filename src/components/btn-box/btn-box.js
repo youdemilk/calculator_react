@@ -187,13 +187,9 @@ export default class Buttons extends Component {
     const { input, display, clickHandler } = this.props;
     const new_input = input.slice(0, input.length - 1);
     const new_display = display.slice(0, display.length - 1);
+    
     clickHandler(new_input, new_display);
   };
-
-  // getSqrt = () => {
-  //   const sqrt = Math.sqrt(this.props.input);
-  //   this.props.clickHandler(sqrt, sqrt);
-  // };
 
   calcPerc = symbol => {
     let nums = this.props.input.split(symbol);
@@ -214,7 +210,9 @@ export default class Buttons extends Component {
   };
 
   getPerc = () => {
-    let res = this.props.input;
+    const { input, clickHandler } = this.props;
+    let res = input;
+
     if (res.includes("+")) {
       res = this.calcPerc("+");
     } else if (res.includes("-")) {
@@ -224,11 +222,13 @@ export default class Buttons extends Component {
     } else if (res.includes("/")) {
       res = this.calcPerc("/");
     }
-    this.props.clickHandler(res, res);
+    clickHandler(res, res);
   };
 
   changeSign = () => {
-    let str = this.props.input;
+    const { input, clickHandler } = this.props;
+    let str = input;
+
     for (let i = str.length - 1; i >= 0; i--) {
       let ch = str.substring(i, i + 1);
       if ("0123456789,.".indexOf(ch) >= 0);
@@ -241,7 +241,7 @@ export default class Buttons extends Component {
       }
       if (i === 0) str = "-" + str;
     }
-    this.props.clickHandler(str, str);
+    clickHandler(str, str);
   };
 
   toInput = label => {
