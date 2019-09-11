@@ -3,7 +3,7 @@ import Button from "../button";
 import "./history.css";
 
 const History = ({ history, clearHistory }) => {
-  history = JSON.parse(localStorage.getItem("currUser")).history;
+  // history = JSON.parse(localStorage.getItem("currUser")).history;
   const clearBtn = {
     label: "Clear",
     btnStyle: "clear_btn",

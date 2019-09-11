@@ -1,0 +1,61 @@
+.link-btn:active {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    background-color: #c80;
+}
+
+.link-btn:hover {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    outline: 0;
+}
+
+.link-btn {
+    background: #fb3;
+    color: #ffffff;
+    padding: 15px;
+    border: 0;
+    border-radius: 2px;
+    outline: none;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    margin: 0;
+    font-size: 20px;
+    text-decoration: none;
+    display: block
+}
+
+.change-user-btn {
+    background-color: #ff3547;
+    color: #ffffff;
+    padding: 15px;
+    border: 0;
+    border-radius: 2px;
+    outline: none;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    font-size: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center
+}
+
+.change-user-btn:hover {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    outline: 0;
+}
+
+.change-user-btn:active {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    background-color: #adadad;
+}
+
+.mainside {
+    display: flex;
+}
+
+.btn-box {
+
+    flex: 0 2 50%
+}
+
+.history {
+    flex: 0 2 50%;
+}

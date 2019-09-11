@@ -29,7 +29,7 @@ export default class Buttons extends Component {
         {
           label: "√",
           btnStyle: "btn_clear",
-          funcBtn: () => this.toInput("√"),
+          funcBtn: this.getSqrt,
           id: 3
         },
 
@@ -191,6 +191,11 @@ export default class Buttons extends Component {
     clickHandler(new_input, new_display);
   };
 
+  getSqrt = () => {
+    const sqrt = Math.sqrt(this.props.input);
+    this.props.clickHandler(sqrt, sqrt)
+  };
+
   calcPerc = symbol => {
     let nums = this.props.input.split(symbol);
     nums[1] = nums[1].slice(0, nums[1].length - 1);
@@ -274,7 +279,7 @@ export default class Buttons extends Component {
 
       res = infixToPostfix(input);
       users[user_idx].history = history;
-      localStorage.setItem("currUser", JSON.stringify(users[user_idx]));
+      // localStorage.setItem("currUser", JSON.stringify(users[user_idx]));
       localStorage.setItem("users", JSON.stringify(users));
       if (isNaN(res)) res = "Undefined";
     }
@@ -286,25 +291,25 @@ export default class Buttons extends Component {
     const elements = this.state.btnData.map(el => (
       <Button key={el.id} props={el} />
     ));
-    let customBtns = JSON.parse(localStorage.getItem("currUser")).btns;
-    if (customBtns) {
-      customBtns = customBtns.map(item => {
-        const properties = {
-          label: item,
-          btnStyle: "btn_number",
-          funcBtn: () => this.toInput(item),
-          id: this.maxId++
-        };
-        return <Button key={item} props={properties} />;
-      });
-    } else {
-      customBtns = "";
-    }
+    // let customBtns = JSON.parse(localStorage.getItem("currUser")).buttons;
+    // if (customBtns) {
+    //   customBtns = customBtns.map(item => {
+    //     const properties = {
+    //       label: item,
+    //       btnStyle: "btn_number",
+    //       funcBtn: () => this.toInput(item),
+    //       id: this.maxId++
+    //     };
+    //     return <Button key={item} props={properties} />;
+    //   });
+    // } else {
+    //   customBtns = "";
+    // }
 
     return (
       <div className="btn-box">
         {elements}
-        {customBtns}
+        {/* {customBtns} */}
       </div>
     );
   }

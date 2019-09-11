@@ -1,6 +1,6 @@
 const initialState = {
   users: [],
-  currentUser: {}
+  currentUser: null,
 };
 
 export function usersReducer(state = initialState, action) {
@@ -8,7 +8,7 @@ export function usersReducer(state = initialState, action) {
     case "SET_USERS": {
       return {
         ...state,
-        users: [...state.users, ...action.payload]
+        users: action.payload
       };
     }
 
@@ -21,7 +21,7 @@ export function usersReducer(state = initialState, action) {
 
     case "DELETE_USER": {
       const users = state.users.filter(item => item.id !== action.payload);
-      
+
       return {
         ...state,
         users
@@ -46,6 +46,45 @@ export function usersReducer(state = initialState, action) {
       return {
         ...state,
         currentUser
+      };
+    }
+
+    case "ADD_CUSTOM_BUTTON": {
+      const currentUserButtons = state.currentUser.buttons ? state.currentUser.buttons : [];
+
+      return {
+        ...state,
+        currentUser: {...state.currentUser, buttons: [...currentUserButtons, action.payload] } 
+      };
+    }
+
+    case "SET_CUSTOM_BUTTONS": {
+      const currentUserButtons = state.currentUser.buttons ? state.currentUser.buttons : [];
+      
+      return {
+        ...state,
+        currentUser:{...state.currentUser,  buttons: [...currentUserButtons, ...action.payload]}
+      };
+    }
+
+    case "DELETE_CUSTOM_BUTTON": {
+      const buttons = state.currentUser.buttons.filter(item => item !== action.payload);
+
+      return {
+        ...state,
+        currentUser: { ...state.currentUser, buttons: buttons }
+      };
+    }
+
+    case "EDIT_CUSTOM_BUTTON": {
+      const buttons = state.currentUser.buttons.map(item => {
+        if (item === action.button) return action.button;
+        return item;
+      });
+
+      return {
+        ...state,
+        currentUser: {...state.currentUser, buttons: buttons } 
       };
     }
 

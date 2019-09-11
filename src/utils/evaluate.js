@@ -10,7 +10,6 @@ export function evaluate(expr) {
       sin: x => Math.sin(x),
       cos: x => Math.cos(x),
       ln: x => Math.log(x),
-      "√": x => Math.sqrt(x)
     },
     stack = [];
   console.log(expr);

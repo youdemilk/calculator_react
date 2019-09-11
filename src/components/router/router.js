@@ -46,7 +46,7 @@ const Router = () => {
             return <CreateUser
               {...props}
               title="Edit"
-              userName={JSON.parse(localStorage.getItem("currUser"))["name"]}
+              // userName={JSON.parse(localStorage.getItem("currUser"))["name"]}
             />
           }}
         />
