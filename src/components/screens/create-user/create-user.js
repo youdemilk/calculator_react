@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { setItemToLocalStorage } from "../../../helpers";
 
 import "./create-user.css";
 
@@ -9,13 +8,11 @@ export default class CreateUser extends Component {
     super(props);
 
     this.state = {
-      label: props.userName,
       redirect: false,
       name: props.currentUser ? props.currentUser.name : "",
       id: "",
       buttons: [],
       history: [],
-      users: []
     };
   }
 
@@ -26,9 +23,9 @@ export default class CreateUser extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { addUser, users, editUser, currentUser } = this.props;
+    const { addUser, users, editUser, currentUser, setUsers } = this.props;
     
-    if (!currentUser) {
+    if (this.props.title === "Create") {
       const user = {
         id: parseInt((Math.random() * 10000).toString()),
         name: this.state.name,
@@ -37,7 +34,6 @@ export default class CreateUser extends Component {
       };
 
       addUser(user);
-      setItemToLocalStorage("users", [...users, user]);
     } else {
       const newUsers = users.map(item => {
         if (item.id === currentUser.id)
@@ -45,8 +41,8 @@ export default class CreateUser extends Component {
         return item;
       });
 
+      setUsers(newUsers)
       editUser({ ...currentUser, name: this.state.name });
-      setItemToLocalStorage("users", newUsers);
     }
 
     this.setState({ redirect: true });
@@ -69,7 +65,7 @@ export default class CreateUser extends Component {
               />
             </div>
             <button type="submit" className="create-btn">
-              {!this.props.currentUser ? "Create" : "Edit"}
+              {this.props.title}
             </button>
           </form>
         </div>

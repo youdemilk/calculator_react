@@ -41,11 +41,6 @@ export const addCustomButton = (name) => ({
   payload: name
 });
 
-export const addToHistory = (user) => ({
-  type: ADD_TO_HISTORY,
-  payload: user
-});
-
 export const setCustomButtons = (buttons) => ({
   type: SET_CUSTOM_BUTTONS,
   payload: buttons
@@ -56,7 +51,15 @@ export const deleteCustomButton = (button) => ({
   payload: button
 });
 
-export const editCustomButton = (button) => ({
+export const editCustomButton = (prevName, buttonName) => ({
   type: EDIT_CUSTOM_BUTTON,
-  payload: button
+  payload: {
+    buttonName,
+    prevName
+  }
+});
+
+export const addToHistory = (value) => ({
+  type: ADD_TO_HISTORY,
+  payload: value
 });

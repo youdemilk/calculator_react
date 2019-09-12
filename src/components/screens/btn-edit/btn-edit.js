@@ -1,49 +1,42 @@
 import React, { Component } from "react";
 import Button from "../../button";
 import { Link } from "react-router-dom";
-import { setItemToLocalStorage } from "../../../helpers";
-
-
 import "./btn-edit.css";
 
 export default class BtnEdit extends Component {
-  state = {
-    buttons: []
-  };
-
   componentDidMount() {
     const { setCustomButtons, buttons } = this.props;
-    const storageButtons = buttons || [];
 
     if (!buttons.length) {
-      setCustomButtons(storageButtons);
+      setCustomButtons(buttons);
     }
   }
 
   deleteBtn = button => {
-    const { deleteCustomButton, currentUser } = this.props;
-    const newButtons = currentUser.buttons.filter(item => item !== button);
+    const { deleteCustomButton } = this.props;
 
     deleteCustomButton(button);
-    setItemToLocalStorage("users", { ...currentUser, ...newButtons });
   };
 
   render() {
     const { buttons } = this.props;
 
-    let buttonsList = [];
     const delete_btn = {
       label: "Delete",
       btnStyle: "delete_btn",
       funcBtn: this.deleteBtn
     };
     
-    buttonsList = buttons.map(item => {
+    const buttonsList = buttons.map(item => {
       return (
         <li key={item}>
           <span className="btn_name">{item}</span>
           <Link
-            to="/calculator/buttons/editBtn"
+            to={{
+              state: {
+                prevName: item
+              },
+              pathname: "/calculator/buttons/editBtn"}}
             className="edit_btn"
           >
             Edit

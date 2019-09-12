@@ -31,7 +31,6 @@ const Router = () => {
             <CreateBtn
               {...props}
               title="Edit"
-              btnName={localStorage.getItem("currBtn")}
             />
           )}
         />
@@ -46,7 +45,6 @@ const Router = () => {
             return <CreateUser
               {...props}
               title="Edit"
-              // userName={JSON.parse(localStorage.getItem("currUser"))["name"]}
             />
           }}
         />

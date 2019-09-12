@@ -10,6 +10,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
     users: state.usersReducer.users,
+    currentUser: state.usersReducer.currentUser,
 });
 
 export default connect(

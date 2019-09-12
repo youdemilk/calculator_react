@@ -1,26 +1,22 @@
 import React, { Component } from "react";
 import Button from "../../button";
 import { Link } from "react-router-dom";
-import { setItemToLocalStorage } from "../../../helpers";
 
 import "./home-page.css";
 
 class HomePage extends Component {
   componentDidMount() {
-    const storageUsers = JSON.parse(localStorage.getItem("users")) || [];
     const { setUsers, users } = this.props;
     
     if (!users.length) {
-      setUsers(storageUsers);
+      setUsers(users);
     }
   }
 
   deleteUser = user => {
-    const { deleteUser, users } = this.props;
-    const newUsers = users.filter(item => item.id !== user.id);
+    const { deleteUser } = this.props;
 
     deleteUser(user);
-    setItemToLocalStorage("users", newUsers);
   };
 
   render() {
@@ -40,9 +36,6 @@ class HomePage extends Component {
             to="/calculator"
             onClick={() => {
               setCurrentUser(item);
-              console.log(item)
-              // localStorage.setItem("currUser", JSON.stringify(item) )
-              localStorage.setItem("currUserIdx", index.toString());
             }}
           >
             {item["name"]}
@@ -51,8 +44,6 @@ class HomePage extends Component {
             to="/edituser"
             onClick={() => {
               setCurrentUser(item);
-              localStorage.setItem("currUserIdx", index.toString());
-              // localStorage.setItem("currUser", JSON.stringify(item))
             }
             }
             className="edit_btn"
@@ -69,7 +60,6 @@ class HomePage extends Component {
         <Link
           to="/createuser"
           className="add_btn"
-          onClick={() => localStorage.setItem("currUser", "")}
         >
           Add new user
         </Link>

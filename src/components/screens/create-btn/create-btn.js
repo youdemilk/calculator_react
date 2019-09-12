@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { setItemToLocalStorage } from "../../../helpers";
 
 import "./create-btn.css";
 
@@ -9,12 +8,11 @@ export default class CreateBtn extends Component {
     super(props);
 
     this.state = {
-      label: this.props.btnName,
       redirect: false,
       name: "",
       id: "",
       history: [],
-      users: [],
+      users: []
     };
   }
 
@@ -27,30 +25,43 @@ export default class CreateBtn extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { addCustomButton, setUsers, currentUser, users, editCustomButton } = this.props;
+    const {
+      addCustomButton,
+      setUsers,
+      currentUser,
+      users,
+      editCustomButton,
+      location
+    } = this.props;
 
-    if ( this.props.title === "Create") {
+    if (this.props.title === "Create") {
       const newUsers = users.map(item => {
         if (item.id === currentUser.id)
-          return { ...currentUser, buttons: [ ...currentUser.buttons, this.state.name] };
-          return item;
-      }); 
-  
+          return {
+            ...currentUser,
+            buttons: [...currentUser.buttons, this.state.name]
+          };
+        return item;
+      });
+
+      setUsers(newUsers)
       addCustomButton(this.state.name);
-      setUsers(newUsers);
-      setItemToLocalStorage("users", newUsers);
     } else {
       const newUsers = users.map(item => {
         if (item.id === currentUser.id)
-          return { ...currentUser, buttons: [ ...currentUser.buttons, this.state.name] };
-          return item;
-      }); 
+          return {
+            ...currentUser,
+            buttons: currentUser.buttons.map(button => 
+              button === location.state.prevName ? this.state.name : button      
+            )
+          };
+        return item;
+      });
 
-      setUsers(newUsers);
-      editCustomButton({ ...currentUser, buttons: [ ...currentUser.buttons, this.state.name ] });
-      setItemToLocalStorage("users", { ...currentUser, newUsers });
+      setUsers(newUsers)
+      editCustomButton(location.state.prevName, this.state.name);
     }
-    
+
     this.setState({ redirect: true });
   };
 
@@ -58,6 +69,7 @@ export default class CreateBtn extends Component {
     if (this.state.redirect) return <Redirect to="/calculator/buttons" />;
     return (
       <div className="form">
+        <h1>{this.props.title}</h1>
         <form onSubmit={this.onSubmit} className="create-btn-form">
           <input
             className="input_add"
@@ -67,7 +79,7 @@ export default class CreateBtn extends Component {
             value={this.state.name}
           />
           <button type="submit" className="create-btn">
-            Add to Calc
+            {this.props.title === "Create" ? "Create" : "Edit"}
           </button>
         </form>
       </div>

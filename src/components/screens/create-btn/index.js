@@ -4,8 +4,10 @@ import actions from "../../../actions";
 
 const mapDispatchToProps = dispatch => ({
   addCustomButton: (name) => dispatch(actions.addCustomButton(name)),
-  editCustomButton: (user) => dispatch(actions.editCustomButton(user)),
+  editCustomButton: (prevName, buttonName) => dispatch(actions.editCustomButton(prevName, buttonName)),
   setUsers: (users) => dispatch(actions.setUsers(users)),
+  setCurrentUser: (user) => dispatch(actions.setCurrentUser(user)),
+
 });
 
 const mapStateToProps = (state) => ({
