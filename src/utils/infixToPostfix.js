@@ -8,7 +8,7 @@ export function infixToPostfix(s) {
     .replace(/(?<=\))[(scl]/g, "*$&")
     .replace(/[+\-*^/]$/, "");
   s = s.match(/(sin|cos|ln|√|\d+(\.\d+)?|[\^+*-√/()])/g);
-  console.log(s);
+
   let st = [];
   let l = s.length;
   let ns = [];
@@ -37,6 +37,6 @@ export function infixToPostfix(s) {
   while (st[st.length - 1] != null) {
     ns.push(st.pop());
   }
-  console.log("123", ns);
+
   return evaluate(ns);
 }

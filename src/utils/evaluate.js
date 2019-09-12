@@ -4,15 +4,15 @@ export function evaluate(expr) {
       "-": (x, y) => x - y,
       "*": (x, y) => x * y,
       "/": (x, y) => x / y,
-      "^": (x, y) => Math.pow(x, y),
+      "^": (x, y) => Math.pow(x, y)
     },
     functions = {
       sin: x => Math.sin(x),
       cos: x => Math.cos(x),
-      ln: x => Math.log(x),
+      ln: x => Math.log(x)
     },
     stack = [];
-  console.log(expr);
+
   expr.forEach(token => {
     if (token in operators) {
       let [y, x] = [stack.pop(), stack.pop()];

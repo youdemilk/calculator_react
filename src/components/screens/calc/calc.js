@@ -14,10 +14,6 @@ export default class Calc extends Component {
     this.state = {
       input: "",
       display: "",
-      history: []
-        // JSON.parse(localStorage.getItem("currUser")).history.length === 0
-        //   ? []
-        //   : JSON.parse(localStorage.getItem("currUser")).history
     };
     this.operations = ["+", "-", "*", "/", "%"];
   }
@@ -27,13 +23,19 @@ export default class Calc extends Component {
   };
 
   clrHistory = history => {
-    const { users } = this.props;
-    const user_idx = JSON.parse(localStorage.getItem("currUserIdx"));
+    const { users, setUsers, clearHistory, currentUser } = this.props;
 
-    users[user_idx]["history"] = [];
-    // localStorage.setItem("currUser", JSON.stringify(users[user_idx]));
-    localStorage.setItem("users", JSON.stringify(users));
-    this.setState({ history: [] });
+    const newUsers = users.map(item => {
+      if (item.id === currentUser.id)
+        return {
+          ...currentUser,
+          history: []
+        };
+      return item;
+    });
+    
+    clearHistory();
+    setUsers(newUsers);
   };
 
   render() {

@@ -93,7 +93,14 @@ export function usersReducer(state = initialState, action) {
 
       return {
         ...state,
-        currentUser: { ...state.currentUser, history: currentUserHistory }
+        currentUser: { ...state.currentUser, history: [...currentUserHistory, action.payload] }
+      };
+    }
+
+    case "CLEAR_HISTORY": {
+      return {
+        ...state,
+        currentUser: { ...state.currentUser, history: [] }
       };
     }
 

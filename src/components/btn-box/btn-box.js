@@ -187,13 +187,13 @@ export default class Buttons extends Component {
     const { input, display, clickHandler } = this.props;
     const new_input = input.slice(0, input.length - 1);
     const new_display = display.slice(0, display.length - 1);
-    
+
     clickHandler(new_input, new_display);
   };
 
   getSqrt = () => {
     const sqrt = Math.sqrt(this.props.input);
-    this.props.clickHandler(sqrt, sqrt)
+    this.props.clickHandler(sqrt, sqrt);
   };
 
   calcPerc = symbol => {
@@ -260,56 +260,64 @@ export default class Buttons extends Component {
   };
 
   getResult = () => {
-    const { input, clickHandler } = this.props;
+    const {
+      input,
+      clickHandler,
+      setUsers,
+      addToHistory,
+      history,
+      currentUser,
+      users
+    } = this.props;
     let res;
 
     if (input.includes("/0")) {
       res = "You cant division by 0";
     } else {
-      const user_idx = JSON.parse(localStorage.getItem("currUserIdx"));
-      let users = JSON.parse(localStorage.getItem("users"));
-      let history = users[user_idx].history;
       const result = input + "=" + infixToPostfix(input);
+      const newUsers = users.map(item => {
+        if (item.id === currentUser.id)
+          return {
+            ...currentUser,
+            history: [...history, result]
+          };
+        return item;
+      });
 
-      if (history.length) {
-        history.push(result);
-      } else {
-        history = [result];
-      }
+      addToHistory(result);
+      setUsers(newUsers);
 
       res = infixToPostfix(input);
-      users[user_idx].history = history;
-      // localStorage.setItem("currUser", JSON.stringify(users[user_idx]));
-      localStorage.setItem("users", JSON.stringify(users));
+
       if (isNaN(res)) res = "Undefined";
     }
-    console.log(res);
+
     clickHandler(res, res);
   };
 
   render() {
+    let customButtons = [];
+    const { buttons } = this.props;
     const elements = this.state.btnData.map(el => (
       <Button key={el.id} props={el} />
     ));
-    // let customBtns = JSON.parse(localStorage.getItem("currUser")).buttons;
-    // if (customBtns) {
-    //   customBtns = customBtns.map(item => {
-    //     const properties = {
-    //       label: item,
-    //       btnStyle: "btn_number",
-    //       funcBtn: () => this.toInput(item),
-    //       id: this.maxId++
-    //     };
-    //     return <Button key={item} props={properties} />;
-    //   });
-    // } else {
-    //   customBtns = "";
-    // }
+
+    if (buttons !== []) {
+      customButtons = buttons.map(item => {
+        const properties = {
+          label: item,
+          btnStyle: "btn_number",
+          funcBtn: () => this.toInput(item),
+          id: this.maxId++
+        };
+        return <Button key={item} props={properties} />;
+      });
+    }
 
     return (
       <div className="btn-box">
         {elements}
-        {/* {customBtns} */}
+        {customButtons}
       </div>
     );
   }

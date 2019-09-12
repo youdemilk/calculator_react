@@ -3,13 +3,13 @@ import Button from "../button";
 import "./history.css";
 
 const History = ({ history, clearHistory }) => {
-  // history = JSON.parse(localStorage.getItem("currUser")).history;
+  let historyList = [];
+  
   const clearBtn = {
     label: "Clear",
     btnStyle: "clear_btn",
     funcBtn: clearHistory
   };
-  let historyList = [];
   historyList = history.map(item => {
     return (
       <li key={item}>

@@ -8,7 +8,8 @@ import {
   EDIT_CUSTOM_BUTTON,
   DELETE_CUSTOM_BUTTON,
   SET_CUSTOM_BUTTONS,
-  ADD_TO_HISTORY
+  ADD_TO_HISTORY,
+  CLEAR_HISTORY
 } from "../constants/constants";
 
 export const addUser = (user) => ({
@@ -63,3 +64,8 @@ export const addToHistory = (value) => ({
   type: ADD_TO_HISTORY,
   payload: value
 });
+
+export const clearHistory = () => ({
+  type: CLEAR_HISTORY,
+});
+
