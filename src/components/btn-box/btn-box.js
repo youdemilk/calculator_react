@@ -276,9 +276,9 @@ export default class Buttons extends Component {
   toInput = label => {
     const { input, display, clickHandler } = this.props;
 
-    if (/[\/\+*-]$/.test(display)) {
-      clickHandler(input + label, display.slice(0, -1) + label);
-    } else if (/(sin|cos|ln)/.test(label)) {
+    // if (/[\/\+*-]$/.test(display)) {
+    //   clickHandler(input + label, display.slice(0, -1) + label);
+    if (/(sin|cos|ln)/.test(label)) {
       clickHandler(input + label + "(", display + label + "(");
     } else clickHandler(input + label, display + label);
   };
