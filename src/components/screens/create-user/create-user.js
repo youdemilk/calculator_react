@@ -11,8 +11,6 @@ export default class CreateUser extends Component {
       redirect: false,
       name: props.currentUser ? props.currentUser.name : "",
       id: "",
-      buttons: [],
-      history: [],
     };
   }
 
@@ -41,7 +39,7 @@ export default class CreateUser extends Component {
         return item;
       });
 
-      setUsers(newUsers)
+      setUsers(newUsers);
       editUser({ ...currentUser, name: this.state.name });
     }
 

@@ -1,44 +1,42 @@
 import { evaluate } from "./evaluate";
-import { prec } from "./prec";
+import { prec } from './prec'
 
-export function infixToPostfix(expression) {
-  expression = expression
-    .replace(/(?<![\d)])-.+?(?=[+\-*^/]|$)/g, "(0$&)")
+export function   infixToPostfix(s) {
+  s = s
+    .replace(/(?<![\d\)])-.+?(?=[+\-*^/]|$)/g, "(0$&)")
     .replace(/\d(?=[csl(])/g, "$&*")
-    .replace(/(?<=\))[(scl]/g, "*$&")
+    .replace(/(?<=\))[\(scl]/g, "*$&")
     .replace(/[+\-*^/]$/, "");
-  expression = expression.match(/(sin|cos|ln|√|\d+(\.\d+)?|[\^+*-√/()])/g);
+  s = s.match(/(sin|cos|ln|\d+(\.\d+)?|[\^+*-/()])/g);
+  console.log(s);
+  let st = [];
+  let l = s.length;
+  let ns = [];
 
-  let string = [],
-    newString = [];
-
-  for (let i = 0; i < expression.length; i++) {
-    if (/\d+/.test(expression[i])) newString.push(expression[i]);
-    else if (expression[i] === "(") string.push("(");
-    else if (expression[i] === ")") {
-      while (
-        string[string.length - 1] !== null &&
-        string[string.length - 1] !== "("
-      ) {
-        newString.push(string.pop());
+  for (let i = 0; i < l; i++) {
+    if (/\d+/.test(s[i])) ns.push(s[i]);
+    else if (s[i] == "(") st.push("(");
+    else if (s[i] == ")") {
+      while (st[st.length - 1] != null && st[st.length - 1] != "(") {
+        ns.push(st.pop());
       }
-      if (string[string.length - 1] === "(") {
-        string.pop();
+      if (st[st.length - 1] == "(") {
+        st.pop();
       }
     } else {
       while (
-        string[string.length - 1] !== null &&
-        prec(string[i]) <= prec(string[string.length - 1])
-      ) {
-        newString.push(string.pop());
+        st[st.length - 1] != null &&
+        prec(s[i]) <= prec(st[st.length - 1])
+        ) {
+        ns.push(st.pop());
       }
-      string.push(string[i]);
+      st.push(s[i]);
     }
   }
 
-  while (string[string.length - 1] != null) {
-    newString.push(string.pop());
+  while (st[st.length - 1] != null) {
+    ns.push(st.pop());
   }
-
-  return evaluate(newString);
+  console.log(ns);
+  return evaluate(ns);
 }

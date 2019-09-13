@@ -126,7 +126,7 @@ export default class Buttons extends Component {
 
         {
           label: "%",
-          btnStyle: "btn_operation",
+          btnStyle: "btn_number",
           funcBtn: () => this.getPercent,
           id: 17
         },
@@ -178,6 +178,27 @@ export default class Buttons extends Component {
           btnStyle: "btn_addOperation",
           funcBtn: () => this.toInput(")"),
           id: 24
+        },
+
+        {
+          label: "sin",
+          btnStyle: "btn_addOperation",
+          funcBtn: () => this.toInput("sin"),
+          id: 25
+        },
+
+        {
+          label: "cos",
+          btnStyle: "btn_addOperation",
+          funcBtn: () => this.toInput("cos"),
+          id: 26
+        },
+
+        {
+          label: "ln",
+          btnStyle: "btn_addOperation",
+          funcBtn: () => this.toInput("ln"),
+          id: 27
         }
       ]
     };
@@ -255,7 +276,11 @@ export default class Buttons extends Component {
   toInput = label => {
     const { input, display, clickHandler } = this.props;
 
-    clickHandler(input + label, display + label);
+    if (/[\/\+*-]$/.test(display)) {
+      clickHandler(input + label, display.slice(0, -1) + label);
+    } else if (/(sin|cos|ln)/.test(label)) {
+      clickHandler(input + label + "(", display + label + "(");
+    } else clickHandler(input + label, display + label);
   };
 
   clearInput = () => {
@@ -272,30 +297,33 @@ export default class Buttons extends Component {
       currentUser,
       users
     } = this.props;
-    let res;
+    let result;
+    const postfixedInput = infixToPostfix(input);
 
     if (input.includes("/0")) {
-      res = "You cant division by 0";
+      result = "You cant division by 0";
     } else {
-      const result = input + "=" + infixToPostfix(input);
+      const historyResult = input + "=" + postfixedInput;
       const newUsers = users.map(item => {
         if (item.id === currentUser.id)
           return {
             ...currentUser,
-            history: [...history, result]
+            history: [...history, historyResult]
           };
         return item;
       });
 
-      addToHistory(result);
+      addToHistory(historyResult);
       setUsers(newUsers);
 
-      res = infixToPostfix(input);
+      result = postfixedInput;
 
-      if (isNaN(res)) res = "Undefined";
+      if (isNaN(result)) {
+        result = "Undefined";
+      }
     }
 
-    clickHandler(res, res);
+    clickHandler(result, result);
   };
 
   render() {

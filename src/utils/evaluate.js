@@ -1,4 +1,4 @@
-export function evaluate(expr) {
+export function evaluate(expression) {
   let operators = {
       "+": (x, y) => x + y,
       "-": (x, y) => x - y,
@@ -13,7 +13,7 @@ export function evaluate(expr) {
     },
     stack = [];
 
-  expr.forEach(token => {
+  expression.forEach(token => {
     if (token in operators) {
       let [y, x] = [stack.pop(), stack.pop()];
       stack.push(operators[token](x, y));
