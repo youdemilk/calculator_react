@@ -1,6 +1,7 @@
 const initialState = {
   users: [],
   currentUser: {},
+  currentButton: '',
 };
 
 export function usersReducer(state = initialState, action) {
@@ -76,9 +77,18 @@ export function usersReducer(state = initialState, action) {
       };
     }
 
+    case "SET_CURRENT_CUSTOM_BUTTON": {
+      const currentButton = action.payload;
+
+      return {
+        ...state,
+        currentButton
+      };
+    }
+
     case "EDIT_CUSTOM_BUTTON": {
       const buttons = state.currentUser.buttons.map(item => {
-        if (item === action.payload.prevName) return action.payload.buttonName;
+        if (item === state.currentButton) return action.payload;
         return item;
       });
 

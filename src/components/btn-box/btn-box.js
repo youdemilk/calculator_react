@@ -127,7 +127,7 @@ export default class Buttons extends Component {
         {
           label: "%",
           btnStyle: "btn_operation",
-          funcBtn: () => this.getPerc,
+          funcBtn: () => this.getPercent,
           id: 17
         },
 
@@ -192,12 +192,15 @@ export default class Buttons extends Component {
   };
 
   getSqrt = () => {
-    const sqrt = Math.sqrt(this.props.input);
-    this.props.clickHandler(sqrt, sqrt);
+    const { input, clickHandler } = this.props;
+    const sqrt = Math.sqrt(input);
+
+    clickHandler(sqrt, sqrt);
   };
 
-  calcPerc = symbol => {
+  calculatePercent = (symbol) => {
     let nums = this.props.input.split(symbol);
+
     nums[1] = nums[1].slice(0, nums[1].length - 1);
     nums = nums.map(el => parseFloat(el));
     switch (symbol) {
@@ -214,18 +217,18 @@ export default class Buttons extends Component {
     }
   };
 
-  getPerc = () => {
+  getPercent = () => {
     const { input, clickHandler } = this.props;
     let res = input;
 
     if (res.includes("+")) {
-      res = this.calcPerc("+");
+      res = this.calculatePercent("+");
     } else if (res.includes("-")) {
-      res = this.calcPerc("-");
+      res = this.calculatePercent("-");
     } else if (res.includes("*")) {
-      res = this.calcPerc("*");
+      res = this.calculatePercent("*");
     } else if (res.includes("/")) {
-      res = this.calcPerc("/");
+      res = this.calculatePercent("/");
     }
     clickHandler(res, res);
   };

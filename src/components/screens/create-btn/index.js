@@ -6,13 +6,12 @@ const mapDispatchToProps = dispatch => ({
   addCustomButton: (name) => dispatch(actions.addCustomButton(name)),
   editCustomButton: (prevName, buttonName) => dispatch(actions.editCustomButton(prevName, buttonName)),
   setUsers: (users) => dispatch(actions.setUsers(users)),
-  setCurrentUser: (user) => dispatch(actions.setCurrentUser(user)),
-
 });
 
 const mapStateToProps = (state) => ({
   users: state.usersReducer.users,
   currentUser: state.usersReducer.currentUser,
+  currentButton: state.usersReducer.currentButton
 });
 
 export default connect(

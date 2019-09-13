@@ -28,7 +28,7 @@ class HomePage extends Component {
       funcBtn: this.deleteUser
     };
 
-    const usersList = users.map((item, index) => {
+    const usersList = users.map((item) => {
       return (
         <li key={item.id}>
           <Link

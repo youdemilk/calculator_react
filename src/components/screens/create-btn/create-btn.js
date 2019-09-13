@@ -31,7 +31,7 @@ export default class CreateBtn extends Component {
       currentUser,
       users,
       editCustomButton,
-      location
+      currentButton
     } = this.props;
 
     if (this.props.title === "Create") {
@@ -44,22 +44,22 @@ export default class CreateBtn extends Component {
         return item;
       });
 
-      setUsers(newUsers)
+      setUsers(newUsers);
       addCustomButton(this.state.name);
     } else {
       const newUsers = users.map(item => {
         if (item.id === currentUser.id)
           return {
             ...currentUser,
-            buttons: currentUser.buttons.map(button => 
-              button === location.state.prevName ? this.state.name : button      
+            buttons: currentUser.buttons.map(button =>
+              button === currentButton ? this.state.name : button
             )
           };
         return item;
       });
 
-      setUsers(newUsers)
-      editCustomButton(location.state.prevName, this.state.name);
+      setUsers(newUsers);
+      editCustomButton(this.state.name);
     }
 
     this.setState({ redirect: true });

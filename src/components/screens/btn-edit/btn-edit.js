@@ -19,7 +19,7 @@ export default class BtnEdit extends Component {
   };
 
   render() {
-    const { buttons } = this.props;
+    const { buttons, setCurrentCustomButton } = this.props;
 
     const delete_btn = {
       label: "Delete",
@@ -32,12 +32,11 @@ export default class BtnEdit extends Component {
         <li key={item}>
           <span className="btn_name">{item}</span>
           <Link
-            to={{
-              state: {
-                prevName: item
-              },
-              pathname: "/calculator/buttons/editBtn"}}
+            to="/calculator/buttons/editBtn"
             className="edit_btn"
+            onClick={() => {
+                setCurrentCustomButton(item);
+            }}
           >
             Edit
           </Link>

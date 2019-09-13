@@ -9,7 +9,8 @@ import {
   DELETE_CUSTOM_BUTTON,
   SET_CUSTOM_BUTTONS,
   ADD_TO_HISTORY,
-  CLEAR_HISTORY
+  CLEAR_HISTORY,
+  SET_CURRENT_CUSTOM_BUTTON
 } from "../constants/constants";
 
 export const addUser = (user) => ({
@@ -42,6 +43,11 @@ export const addCustomButton = (name) => ({
   payload: name
 });
 
+export const setCurrentCustomButton = (button) => ({
+  type: SET_CURRENT_CUSTOM_BUTTON,
+  payload: button
+});
+
 export const setCustomButtons = (buttons) => ({
   type: SET_CUSTOM_BUTTONS,
   payload: buttons
@@ -52,12 +58,9 @@ export const deleteCustomButton = (button) => ({
   payload: button
 });
 
-export const editCustomButton = (prevName, buttonName) => ({
+export const editCustomButton = (buttonName) => ({
   type: EDIT_CUSTOM_BUTTON,
-  payload: {
-    buttonName,
-    prevName
-  }
+  payload: buttonName
 });
 
 export const addToHistory = (value) => ({
