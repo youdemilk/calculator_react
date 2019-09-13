@@ -21,7 +21,6 @@ const Router = () => {
             <CreateBtn
               {...props}
               title="Create"
-              btnName={localStorage.getItem("currBtn")}
             />
           )}
         />
@@ -36,12 +35,11 @@ const Router = () => {
         />
         <Route
           path="/createuser"
-          render={props => <CreateUser {...props} title="Create" userName="" />}
+          render={props => <CreateUser {...props} title="Create"/>}
         />
         <Route
           path="/edituser"
           render={props => {
-            console.log("123",props)
             return <CreateUser
               {...props}
               title="Edit"

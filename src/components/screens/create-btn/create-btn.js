@@ -10,9 +10,6 @@ export default class CreateBtn extends Component {
     this.state = {
       redirect: false,
       name: "",
-      id: "",
-      history: [],
-      users: []
     };
   }
 
@@ -78,8 +75,10 @@ export default class CreateBtn extends Component {
             onChange={this.onNameChange}
             value={this.state.name}
           />
-          <button type="submit" className="create-btn">
+          <button type="submit"
+                  className="create-btn">
             {this.props.title === "Create" ? "Create" : "Edit"}
+
           </button>
         </form>
       </div>

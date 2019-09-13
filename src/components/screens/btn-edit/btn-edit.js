@@ -13,8 +13,18 @@ export default class BtnEdit extends Component {
   }
 
   deleteBtn = button => {
-    const { deleteCustomButton } = this.props;
+    const { deleteCustomButton, setUsers, users, currentUser } = this.props;
+    const buttons = currentUser.buttons.filter(item => item !== button);
+    const newUsers = users.map(item => {
+      if (item.id === currentUser.id)
+        return {
+          ...currentUser,
+          buttons: buttons
+        };
+      return item;
+    });
 
+    setUsers(newUsers);
     deleteCustomButton(button);
   };
 
