@@ -1,1 +1,1 @@
-export { store, persistor } from './configureStore'
+export { store, persistor } from "./configureStore";

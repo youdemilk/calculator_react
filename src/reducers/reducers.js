@@ -1,7 +1,7 @@
 const initialState = {
   users: [],
   currentUser: {},
-  currentButton: '',
+  currentButton: ""
 };
 
 export function usersReducer(state = initialState, action) {
@@ -42,7 +42,7 @@ export function usersReducer(state = initialState, action) {
     }
 
     case "SET_CURRENT_USER": {
-      const currentUser = action.payload
+      const currentUser = action.payload;
 
       return {
         ...state,
@@ -51,25 +51,37 @@ export function usersReducer(state = initialState, action) {
     }
 
     case "ADD_CUSTOM_BUTTON": {
-      const currentUserButtons = state.currentUser.buttons ? state.currentUser.buttons : [];
+      const currentUserButtons = state.currentUser.buttons
+        ? state.currentUser.buttons
+        : [];
 
       return {
         ...state,
-        currentUser: {...state.currentUser, buttons: [...currentUserButtons, action.payload] } 
+        currentUser: {
+          ...state.currentUser,
+          buttons: [...currentUserButtons, action.payload]
+        }
       };
     }
 
     case "SET_CUSTOM_BUTTONS": {
-      const currentUserButtons = state.currentUser.buttons ? state.currentUser.buttons : [];
-      
+      const currentUserButtons = state.currentUser.buttons
+        ? state.currentUser.buttons
+        : [];
+
       return {
         ...state,
-        currentUser:{...state.currentUser,  buttons: [...currentUserButtons, ...action.payload]}
+        currentUser: {
+          ...state.currentUser,
+          buttons: [...currentUserButtons, ...action.payload]
+        }
       };
     }
 
     case "DELETE_CUSTOM_BUTTON": {
-      const buttons = state.currentUser.buttons.filter(item => item !== action.payload);
+      const buttons = state.currentUser.buttons.filter(
+        item => item !== action.payload
+      );
 
       return {
         ...state,
@@ -94,16 +106,21 @@ export function usersReducer(state = initialState, action) {
 
       return {
         ...state,
-        currentUser: {...state.currentUser, buttons } 
+        currentUser: { ...state.currentUser, buttons }
       };
-    }       
+    }
 
     case "ADD_TO_HISTORY": {
-      const currentUserHistory = state.currentUser.history ? state.currentUser.history : [];
+      const currentUserHistory = state.currentUser.history
+        ? state.currentUser.history
+        : [];
 
       return {
         ...state,
-        currentUser: { ...state.currentUser, history: [...currentUserHistory, action.payload] }
+        currentUser: {
+          ...state.currentUser,
+          history: [...currentUserHistory, action.payload]
+        }
       };
     }
 

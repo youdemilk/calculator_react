@@ -13,7 +13,7 @@ export default class Calc extends Component {
     super();
     this.state = {
       input: "",
-      display: "",
+      display: ""
     };
     this.operations = ["+", "-", "*", "/", "%"];
   }
@@ -22,9 +22,8 @@ export default class Calc extends Component {
     this.setState({ input, display });
   };
 
-  clrHistory = history => {
+  clearHistory = history => {
     const { users, setUsers, clearHistory, currentUser } = this.props;
-
     const newUsers = users.map(item => {
       if (item.id === currentUser.id)
         return {
@@ -33,15 +32,23 @@ export default class Calc extends Component {
         };
       return item;
     });
-    
+
     clearHistory();
     setUsers(newUsers);
   };
 
   render() {
+    const { setCurrentUser } = this.props;
+
     return (
       <div>
-        <Link to="/" className="change-user-btn">
+        <Link
+          to="/"
+          onClick={() => {
+            setCurrentUser({});
+          }}
+          className="change-user-btn"
+        >
           Switch User
         </Link>
         <AppHeader />
@@ -53,10 +60,7 @@ export default class Calc extends Component {
             display={this.state.display}
             operators={this.operations}
           />
-          <History
-            history={this.state.history}
-            clearHistory={this.clrHistory}
-          />
+          <History clearHistory={this.clearHistory} />
         </div>
         <Link className="link-btn" to="/calculator/buttons">
           Custom Buttons

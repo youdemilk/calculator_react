@@ -4,13 +4,11 @@
 .btn_number,
 .btn_operation,
 .btn_addOperation  {
-    background: #dddddd;
+    background-color: #dddddd;
     color: #ffffff;
     width: 170px;
     height: 100px;
     border: 0;
-    margin: 2px;
-    border-radius: 2px;
     outline: none;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
     margin: .375rem;
@@ -19,27 +17,27 @@
 }
 
 .btn_operation {
-    background: #fb3;
+    background-color: #fb3;
 }
 
 .btn_clear {
-    background: #e0e0e0;
+    background-color: #e0e0e0;
     color: #000;
 }
 
 .btn_number {
-    background: #78909c;
+    background-color: #78909c;
 }
 
 .btn_addOperation {
-    background: #ff3547;
+    background-color: #ff3547;
 }
 .btn_number:active {
-    background: #4a5b64;
+    background-color: #4a5b64;
 }
 
 .btn_addOperation:active {
-    background: #ce0012;
+    background-color: #ce0012;
 }
 
 .btn_action:focus {

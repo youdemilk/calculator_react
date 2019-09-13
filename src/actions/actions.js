@@ -13,62 +13,61 @@ import {
   SET_CURRENT_CUSTOM_BUTTON
 } from "../constants/constants";
 
-export const addUser = (user) => ({
+export const addUser = user => ({
   type: ADD_USER,
   payload: user
 });
 
-export const setUsers = (users) => ({
+export const setUsers = users => ({
   type: SET_USERS,
   payload: users
 });
 
-export const deleteUser = (user) => ({
+export const deleteUser = user => ({
   type: DELETE_USER,
   payload: user.id
 });
 
-export const editUser = (user) => ({
+export const editUser = user => ({
   type: EDIT_USER,
   payload: user
 });
 
-export const setCurrentUser = (user) => ({
+export const setCurrentUser = user => ({
   type: SET_CURRENT_USER,
   payload: user
 });
 
-export const addCustomButton = (name) => ({
+export const addCustomButton = name => ({
   type: ADD_CUSTOM_BUTTON,
   payload: name
 });
 
-export const setCurrentCustomButton = (button) => ({
+export const setCurrentCustomButton = button => ({
   type: SET_CURRENT_CUSTOM_BUTTON,
   payload: button
 });
 
-export const setCustomButtons = (buttons) => ({
+export const setCustomButtons = buttons => ({
   type: SET_CUSTOM_BUTTONS,
   payload: buttons
 });
 
-export const deleteCustomButton = (button) => ({
+export const deleteCustomButton = button => ({
   type: DELETE_CUSTOM_BUTTON,
   payload: button
 });
 
-export const editCustomButton = (buttonName) => ({
+export const editCustomButton = buttonName => ({
   type: EDIT_CUSTOM_BUTTON,
   payload: buttonName
 });
 
-export const addToHistory = (value) => ({
+export const addToHistory = value => ({
   type: ADD_TO_HISTORY,
   payload: value
 });
 
 export const clearHistory = () => ({
-  type: CLEAR_HISTORY,
+  type: CLEAR_HISTORY
 });
-

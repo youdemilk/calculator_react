@@ -198,7 +198,7 @@ export default class Buttons extends Component {
     clickHandler(sqrt, sqrt);
   };
 
-  calculatePercent = (symbol) => {
+  calculatePercent = symbol => {
     let nums = this.props.input.split(symbol);
 
     nums[1] = nums[1].slice(0, nums[1].length - 1);

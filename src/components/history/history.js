@@ -3,14 +3,12 @@ import Button from "../button";
 import "./history.css";
 
 const History = ({ history, clearHistory }) => {
-  let historyList = [];
-  
   const clearBtn = {
-    label: "Clear",
+    label: "Clear All",
     btnStyle: "clear_btn",
     funcBtn: clearHistory
   };
-  historyList = history.map(item => {
+  const historyList = history.map(item => {
     return (
       <li key={item}>
         <span className="history-name">{item}</span>

@@ -5,12 +5,13 @@ import actions from "../../../actions";
 const mapDispatchToProps = dispatch => ({
   setUsers: users => dispatch(actions.setUsers(users)),
   clearHistory: () => dispatch(actions.clearHistory()),
+  setCurrentUser: user => dispatch(actions.setCurrentUser(user))
 });
 
 const mapStateToProps = state => ({
   users: state.usersReducer.users,
   history: state.usersReducer.currentUser.history,
-  currentUser: state.usersReducer.currentUser,
+  currentUser: state.usersReducer.currentUser
 });
 
 export default connect(
